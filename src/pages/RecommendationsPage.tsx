@@ -17,7 +17,7 @@ const RecommendationsPage: React.FC = () => {
         
         <h2 className="text-3xl font-bold uppercase">No Recommendations</h2>
         <p className="text-gray-500 mt-2 mb-8">
-          Yuka recommendations<br />
+          NutriScan recommendations<br />
           will appear here
         </p>
         
