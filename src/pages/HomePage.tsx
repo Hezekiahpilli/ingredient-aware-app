@@ -21,7 +21,7 @@ const HomePage: React.FC = () => {
     <div className="flex flex-col items-center justify-center h-screen bg-white">
       <div className="text-center p-6">
         <CarrotMascot size="large" className="mx-auto mb-8" />
-        <h1 className="text-3xl font-bold mb-2">Ingredient Aware</h1>
+        <h1 className="text-3xl font-bold mb-2">NutriScan</h1>
         <p className="text-gray-600 mb-8">Scan products to make healthier choices</p>
         
         <Button 
