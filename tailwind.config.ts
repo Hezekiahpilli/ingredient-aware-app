@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -61,6 +62,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				yuka: {
+					green: '#2ECC71',
+					lightGreen: '#E5F9EF',
+					gray: '#F4F5F7',
+					darkGray: '#8E9196',
+					black: '#1A1F2C',
+					orange: '#FF9055'
 				}
 			},
 			borderRadius: {
