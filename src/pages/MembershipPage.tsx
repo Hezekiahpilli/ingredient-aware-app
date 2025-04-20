@@ -57,7 +57,7 @@ const MembershipPage: React.FC = () => {
         </div>
         
         <h3 className="text-center text-5xl font-bold text-yuka-green">
-          ${sliderValue[0]}/year
+          ₹{sliderValue[0]}/year
         </h3>
         
         <p className="text-center text-gray-500 my-4">
