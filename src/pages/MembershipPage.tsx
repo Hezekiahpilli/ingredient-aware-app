@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
@@ -10,7 +11,7 @@ import { toast } from "sonner";
 const MembershipPage: React.FC = () => {
   const navigate = useNavigate();
   const { setIsMember } = useProducts();
-  const [sliderValue, setSliderValue] = useState([299]);
+  const [billingType, setBillingType] = useState<'yearly' | 'monthly'>('yearly');
   
   const handleBecomeMember = () => {
     setIsMember(true);
@@ -53,27 +54,27 @@ const MembershipPage: React.FC = () => {
           </div>
         </div>
         
-        <h3 className="text-center text-5xl font-bold text-yuka-green">
-          ₹{sliderValue[0]}/year
-        </h3>
-        
-        <p className="text-center text-gray-500 my-4">
-          Your participation helps the project to grow.
-        </p>
-        
-        <div className="px-4 my-6">
-          <Slider 
-            defaultValue={[299]} 
-            max={499} 
-            min={199} 
-            step={1}
-            onValueChange={setSliderValue}
-            className="w-full"
-          />
+        <div className="flex justify-center space-x-4 mb-4">
+          <button 
+            className={`px-4 py-2 rounded ${billingType === 'yearly' ? 'bg-yuka-green text-white' : 'bg-gray-200 text-gray-700'}`}
+            onClick={() => setBillingType('yearly')}
+          >
+            Yearly
+          </button>
+          <button 
+            className={`px-4 py-2 rounded ${billingType === 'monthly' ? 'bg-yuka-green text-white' : 'bg-gray-200 text-gray-700'}`}
+            onClick={() => setBillingType('monthly')}
+          >
+            Monthly
+          </button>
         </div>
         
+        <h3 className="text-center text-5xl font-bold text-yuka-green">
+          {billingType === 'yearly' ? '₹299/year' : '₹49/month'}
+        </h3>
+        
         <Button 
-          className="bg-yuka-green hover:bg-yuka-green/90 text-white w-full py-6 text-xl"
+          className="bg-yuka-green hover:bg-yuka-green/90 text-white w-full py-6 text-xl mt-6"
           onClick={handleBecomeMember}
         >
           Become a member
