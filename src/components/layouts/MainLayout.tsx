@@ -1,7 +1,6 @@
-
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { History, Scan, List, Search, ArrowUp, ArrowDown } from "lucide-react";
+import { History, Scan, List, Search, ArrowUp, ArrowDown, Info } from "lucide-react";
 
 interface MainLayoutProps {
   children: React.ReactNode;
