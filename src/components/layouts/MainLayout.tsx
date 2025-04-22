@@ -1,7 +1,7 @@
 
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { History, CircleDollarSign, Scan, List, Search, Info } from "lucide-react";
+import { History, CircleDollarSign, Scan, List, Search, Info, ArrowUpDown } from "lucide-react";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -20,7 +20,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 
   const navItems = [
     { path: "/history", label: "History", Icon: History },
-    { path: "/recommendations", label: "Recs", Icon: CircleDollarSign },
+    { path: "/recommendations", label: "Recs", Icon: ArrowUpDown },
     { path: "/scan", label: "Scan", Icon: Scan },
     { path: "/top-products", label: "Top", Icon: List },
     { path: "/search", label: "Search", Icon: Search }
