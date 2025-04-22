@@ -1,6 +1,7 @@
+
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { History, Scan, List, Search, ArrowUp, ArrowDown, Info } from "lucide-react";
+import { History, CircleDollarSign, Scan, List, Search, Info } from "lucide-react";
 
 interface MainLayoutProps {
   children: React.ReactNode;
@@ -19,11 +20,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
 
   const navItems = [
     { path: "/history", label: "History", Icon: History },
-    { 
-      path: "/recommendations", 
-      label: "Recs", 
-      Icon: currentPath === "/recommendations" ? ArrowUp : ArrowDown 
-    },
+    { path: "/recommendations", label: "Recs", Icon: CircleDollarSign },
     { path: "/scan", label: "Scan", Icon: Scan },
     { path: "/top-products", label: "Top", Icon: List },
     { path: "/search", label: "Search", Icon: Search }
@@ -61,10 +58,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({
           >
             <Icon 
               size={24} 
-              color={path === "/recommendations" 
-                ? (currentPath === path ? 'green' : 'red') 
-                : (currentPath === path ? 'text-yuka-green' : 'text-gray-500')
-              }
+              className={`${currentPath === path ? 'text-yuka-green' : 'text-gray-500'}`} 
             />
             <span className={`${currentPath === path ? 'text-yuka-green' : 'text-gray-500'}`}>
               {label}
