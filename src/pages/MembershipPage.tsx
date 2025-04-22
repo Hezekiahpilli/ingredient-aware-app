@@ -1,4 +1,3 @@
-
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
@@ -11,7 +10,7 @@ import { toast } from "sonner";
 const MembershipPage: React.FC = () => {
   const navigate = useNavigate();
   const { setIsMember } = useProducts();
-  const [sliderValue, setSliderValue] = useState([15]);
+  const [sliderValue, setSliderValue] = useState([299]);
   
   const handleBecomeMember = () => {
     setIsMember(true);
@@ -21,14 +20,12 @@ const MembershipPage: React.FC = () => {
   
   return (
     <div className="flex flex-col h-screen">
-      {/* Header */}
       <header className="flex items-center p-4 border-b border-gray-200">
         <button onClick={() => navigate(-1)}>
           <X size={24} />
         </button>
       </header>
       
-      {/* Content */}
       <div className="flex-1 overflow-auto p-4">
         <h2 className="text-yuka-green text-center text-xl font-medium mt-4">
           Learn more
@@ -66,9 +63,9 @@ const MembershipPage: React.FC = () => {
         
         <div className="px-4 my-6">
           <Slider 
-            defaultValue={[15]} 
-            max={50} 
-            min={5} 
+            defaultValue={[299]} 
+            max={499} 
+            min={199} 
             step={1}
             onValueChange={setSliderValue}
             className="w-full"
