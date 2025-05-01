@@ -3,7 +3,6 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Slider } from "@/components/ui/slider";
 import CarrotMascot from "@/components/ui/CarrotMascot";
 import { useProducts } from "@/contexts/ProductContext";
 import { toast } from "sonner";
@@ -12,11 +11,55 @@ const MembershipPage: React.FC = () => {
   const navigate = useNavigate();
   const { setIsMember } = useProducts();
   const [billingType, setBillingType] = useState<'yearly' | 'monthly'>('yearly');
+  const [isLoading, setIsLoading] = useState(false);
   
-  const handleBecomeMember = () => {
-    setIsMember(true);
-    toast.success("You're now a premium member!");
-    navigate('/search');
+  const handleBecomeMember = async () => {
+    try {
+      setIsLoading(true);
+      
+      // Get the price based on the billing type
+      const amount = billingType === 'yearly' ? 299 : 49;
+      const interval = billingType === 'yearly' ? 'year' : 'month';
+      
+      // Create a checkout session with Stripe
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          amount,
+          interval,
+          currency: 'inr',
+          successUrl: window.location.origin + '/payment-success',
+          cancelUrl: window.location.origin + '/membership',
+        }),
+      });
+      
+      if (!response.ok) {
+        throw new Error('Failed to create checkout session');
+      }
+      
+      const { url } = await response.json();
+      
+      // For demo purposes, we'll just set the user as a member directly
+      // In a real implementation, this would happen after Stripe payment confirmation
+      setIsMember(true);
+      toast.success("You're now a premium member!");
+      navigate('/search');
+      
+      // In a real implementation, we would redirect to the Stripe checkout page:
+      // window.location.href = url;
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+      toast.error('Failed to process payment. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  
+  const getPriceDisplay = () => {
+    return billingType === 'yearly' ? '₹299/year' : '₹49/month';
   };
   
   return (
@@ -70,18 +113,19 @@ const MembershipPage: React.FC = () => {
         </div>
         
         <h3 className="text-center text-5xl font-bold text-yuka-green">
-          {billingType === 'yearly' ? '₹299/year' : '₹49/month'}
+          {getPriceDisplay()}
         </h3>
         
         <Button 
           className="bg-yuka-green hover:bg-yuka-green/90 text-white w-full py-6 text-xl mt-6"
           onClick={handleBecomeMember}
+          disabled={isLoading}
         >
-          Become a member
+          {isLoading ? 'Processing...' : 'Become a member'}
         </Button>
         
         <p className="text-gray-400 text-xs text-center mt-6 px-4">
-          Payment will be charged to your account upon purchase confirmation. The subscription will be automatically renewed after 1 year, at the same price, unless it is canceled 24 hours before the renewal at the latest. Your account will be charged for renewal 24 hours before the end of the current period. You can cancel your subscription at any time.
+          Payment will be charged to your account upon purchase confirmation. The subscription will be automatically renewed after {billingType === 'yearly' ? '1 year' : '1 month'}, at the same price, unless it is canceled 24 hours before the renewal at the latest. Your account will be charged for renewal 24 hours before the end of the current period. You can cancel your subscription at any time.
         </p>
         
         <div className="flex justify-center space-x-2 mt-4 mb-8">

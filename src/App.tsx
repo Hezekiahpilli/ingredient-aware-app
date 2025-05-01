@@ -14,6 +14,7 @@ import SearchPage from "./pages/SearchPage";
 import ScanPage from "./pages/ScanPage";
 import HistoryPage from "./pages/HistoryPage";
 import MembershipPage from "./pages/MembershipPage";
+import PaymentSuccessPage from "./pages/PaymentSuccessPage";
 import FoodPreferencesPage from "./pages/FoodPreferencesPage";
 import ProductDetailPage from "./pages/ProductDetailPage";
 import NotFound from "./pages/NotFound";
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/scan" element={<ScanPage />} />
             <Route path="/history" element={<HistoryPage />} />
             <Route path="/membership" element={<MembershipPage />} />
+            <Route path="/payment-success" element={<PaymentSuccessPage />} />
             <Route path="/food-preferences" element={<FoodPreferencesPage />} />
             <Route path="/product/:id" element={<ProductDetailPage />} />
             <Route path="*" element={<NotFound />} />
